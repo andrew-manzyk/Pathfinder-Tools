@@ -15,26 +15,10 @@
 #import <GlyphsCore/GSNode.h>
 
 @interface Pathfinder_Tools : GlyphsPathPlugin {
-    double extrudeAngle;
-    double extrudeDistance;
-    int extrudeQuantization;
-    BOOL canExtrude;
-    BOOL selectionValid;
-    BOOL crossesBounds;
-    BOOL extrudeInfo;
     BOOL isMerging;
     BOOL isSubtracting;
     BOOL isIntersecting;
     BOOL isExcluding;
-    GSPathDirection pathDirection;
-    NSPoint mousePosition;
-    NSPoint midpoint;
-    NSBezierPath *bgPath;
-    GSLayer *layer;
-    NSMutableArray *sortedSelection;
-    NSMutableArray *sortedSelectionCoords;
-    NSString *extrudeQuantizationString;
-    NSTextField *valueField;
 }
 
 - (void)mergeSelectedPaths;

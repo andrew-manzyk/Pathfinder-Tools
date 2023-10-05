@@ -10,33 +10,37 @@
 
 @implementation Pathfinder_Tools
 
-- (id)init {
-    self = [super init];
-    NSBundle *thisBundle = [NSBundle bundleForClass:[self class]];
-    if (thisBundle) {
-        // The toolbar icon:
-        _toolBarIcon = [[NSImage alloc] initWithContentsOfFile:[thisBundle pathForImageResource:@"ToolbarIconTemplate"]];
-        [_toolBarIcon setTemplate:YES];
+- (NSImage *)imageFromResource:(NSString *)resourceName ofType:(NSString *)fileType {
+    // Assuming icons are in a folder named "icons" within the bundle
+    NSString *resourcePath = [[NSBundle mainBundle] pathForResource:resourceName ofType:fileType inDirectory:@"icons"];
+    
+    if (resourcePath) {
+        NSURL *resourceURL = [NSURL fileURLWithPath:resourcePath];
+        NSImage *image = [[NSImage alloc] initWithContentsOfURL:resourceURL];
+        return image;
+    } else {
+        NSLog(@"Could not find resource: %@", resourceName);
+        return nil;
     }
-    extrudeInfo = YES;
-    canExtrude = NO;
-    selectionValid = NO;
-    self.dragging = NO;
-    extrudeAngle = 0;
-    extrudeDistance = 0;
-    extrudeQuantization = 0;
-    sortedSelectionCoords = [[NSMutableArray alloc] init];
-
-    return self;
 }
-
 
 - (void)addMenuItemsForEvent:(NSEvent *)theEvent toMenu:(NSMenu *)theMenu {
     NSMenuItem *mergeItem = [[NSMenuItem alloc] initWithTitle:@"Merge" action:@selector(mergeMenuItemSelected:) keyEquivalent:@""];
     NSMenuItem *subtractItem = [[NSMenuItem alloc] initWithTitle:@"Subtract" action:@selector(subtractMenuItemSelected:) keyEquivalent:@""];
     NSMenuItem *intersectItem = [[NSMenuItem alloc] initWithTitle:@"Intersect" action:@selector(intersectMenuItemSelected:) keyEquivalent:@""];
     NSMenuItem *excludeItem = [[NSMenuItem alloc] initWithTitle:@"Exclude" action:@selector(excludeMenuItemSelected:) keyEquivalent:@""];
-    
+
+    // Загрузка и присвоение иконок кнопкам
+    NSImage *mergeIcon = [self imageFromResource:@"Merge" ofType:@"svg"];
+    NSImage *subtractIcon = [self imageFromResource:@"Subtract" ofType:@"svg"];
+    NSImage *intersectIcon = [self imageFromResource:@"Intersect" ofType:@"svg"];
+    NSImage *excludeIcon = [self imageFromResource:@"Exclude" ofType:@"svg"];
+
+    mergeItem.image = mergeIcon;
+    subtractItem.image = subtractIcon;
+    intersectItem.image = intersectIcon;
+    excludeItem.image = excludeIcon;
+
     [theMenu addItem:mergeItem];
     [theMenu addItem:subtractItem];
     [theMenu addItem:intersectItem];
