@@ -15,10 +15,13 @@
 #import <GlyphsCore/GSNode.h>
 
 @interface Pathfinder_Tools : GlyphsPathPlugin {
+    BOOL selectionValid;
     BOOL isMerging;
     BOOL isSubtracting;
     BOOL isIntersecting;
     BOOL isExcluding;
+    NSMutableArray *sortedSelection;
+    NSMutableArray *sortedSelectionCoords;
 }
 
 - (void)mergeSelectedPaths;

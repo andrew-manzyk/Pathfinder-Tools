@@ -25,10 +25,10 @@
 }
 
 - (void)addMenuItemsForEvent:(NSEvent *)theEvent toMenu:(NSMenu *)theMenu {
-    NSMenuItem *mergeItem = [[NSMenuItem alloc] initWithTitle:@"Merge" action:@selector(mergeMenuItemSelected:) keyEquivalent:@""];
-    NSMenuItem *subtractItem = [[NSMenuItem alloc] initWithTitle:@"Subtract" action:@selector(subtractMenuItemSelected:) keyEquivalent:@""];
-    NSMenuItem *intersectItem = [[NSMenuItem alloc] initWithTitle:@"Intersect" action:@selector(intersectMenuItemSelected:) keyEquivalent:@""];
-    NSMenuItem *excludeItem = [[NSMenuItem alloc] initWithTitle:@"Exclude" action:@selector(excludeMenuItemSelected:) keyEquivalent:@""];
+    NSMenuItem *mergeItem = [[NSMenuItem alloc] initWithTitle:@"Merge" action:@selector(mergeSelectedPaths) keyEquivalent:@""];
+    NSMenuItem *subtractItem = [[NSMenuItem alloc] initWithTitle:@"Subtract" action:@selector(subtractSelectedPaths) keyEquivalent:@""];
+    NSMenuItem *intersectItem = [[NSMenuItem alloc] initWithTitle:@"Intersect" action:@selector(intersectSelectedPaths) keyEquivalent:@""];
+    NSMenuItem *excludeItem = [[NSMenuItem alloc] initWithTitle:@"Exclude" action:@selector(excludeSelectedPaths) keyEquivalent:@""];
 
     // Загрузка и присвоение иконок кнопкам
     NSImage *mergeIcon = [self imageFromResource:@"Merge" ofType:@"svg"];
@@ -48,7 +48,7 @@
 }
 
 - (void)mergeSelectedPaths {
-    if (!canExtrude || !selectionValid) {
+    if (!selectionValid) {
         return;
     }
     
@@ -66,7 +66,7 @@
 }
 
 - (void)subtractSelectedPaths {
-    if (!canExtrude || !selectionValid) {
+    if (!selectionValid) {
         return;
     }
     
@@ -86,7 +86,7 @@
 }
 
 - (void)intersectSelectedPaths {
-    if (!canExtrude || !selectionValid) {
+    if (!selectionValid) {
         return;
     }
     
@@ -126,7 +126,7 @@
 }
 
 - (void)excludeSelectedPaths {
-    if (!canExtrude || !selectionValid) {
+    if (!selectionValid) {
         return;
     }
     
