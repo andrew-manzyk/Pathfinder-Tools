@@ -1,6 +1,8 @@
 # Pathfinder Tools
 Pathfinder Tools plugin for [Glyphs.app](https://glyphsapp.com/)
 
+<img style="height:100px;" src="https://github.com/andrew-manzyk/Pathfinder-Tools/blob/main/images/Pathfinder%20Tools.png" alt="Pathfinder Tools">
+
 ## Installation
 
 ### Recommended
